@@ -7,7 +7,7 @@ subtitle: >
   <strong style="font-size: 1.4em; font-weight: 700;">Associate Professor</strong> in the<br>
   <strong style="font-size: 1.4em; font-weight: 700;">Department of Finance</strong> at a<br>
   <strong style="font-size: 1.4em; font-weight: 700;">Tippie-top College of Business</strong> at a large, public<br>
-  <strong style="font-size: 1.4em; font-weight: 700;">University</strong> in the state of Iowa.
+  <strong style="font-size: 1.4em; font-weight: 700;">University</strong> in the state <strong style="font-size: 1.4em; font-weight: 700;">of Iowa</strong>.
 
 profile:
   align: right
