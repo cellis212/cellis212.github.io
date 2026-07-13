@@ -1,0 +1,9 @@
+github_users:
+  - cellis212
+
+repo_description_lines_max: 2
+
+github_repos:
+  - cellis212/overleaf-tracked-changes-mcp-guide
+  - cellis212/Customizable-Spec-Curves-R
+  - cellis212/Scrape-Morningstar-Annuities

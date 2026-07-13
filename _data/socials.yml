@@ -1,0 +1,10 @@
+# Social / contact links shown on the about page and in search.
+# Rendered by the jekyll-socials plugin in the order defined here.
+cv_pdf: /assets/pdf/cv.pdf
+email: Cellis212@gmail.com
+orcid_id: 0000-0002-2794-6299
+scholar_userid: V-HjAKcAAAAJ
+github_username: cellis212
+linkedin_username: cameron-ellis-aa129532
+x_username: cellis212
+rss_icon: false
