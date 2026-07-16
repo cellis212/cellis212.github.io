@@ -12,50 +12,24 @@ nav_order: 1
 
 ## Household Finance and Disaster Risk
 
-**Refereed Publications**
-
 <div class="publications">
-{% bibliography -f papers -q @article[topic=household] -g none %}
+{% bibliography -f papers -q @*[topic=household] -g none %}
 </div>
 
 ## Health Economics and Healthcare Finance
 
-**Refereed Publications**
-
 <div class="publications">
-{% bibliography -f papers -q @article[topic=health] -g none %}
-</div>
-
-**Working Papers**
-
-<div class="publications">
-{% bibliography -f papers -q @unpublished[topic=health] -g none %}
+{% bibliography -f papers -q @*[topic=health] -g none %}
 </div>
 
 ## Life Insurance and Annuities
 
-**Refereed Publications**
-
 <div class="publications">
-{% bibliography -f papers -q @article[topic=life] -g none %}
-</div>
-
-**Working Papers**
-
-<div class="publications">
-{% bibliography -f papers -q @unpublished[topic=life] -g none %}
+{% bibliography -f papers -q @*[topic=life] -g none %}
 </div>
 
 ## Miscellaneous
 
-**Refereed Publications**
-
 <div class="publications">
-{% bibliography -f papers -q @article[topic=misc] -g none %}
-</div>
-
-**Working Papers**
-
-<div class="publications">
-{% bibliography -f papers -q @unpublished[topic=misc] -g none %}
+{% bibliography -f papers -q @*[topic=misc] -g none %}
 </div>
