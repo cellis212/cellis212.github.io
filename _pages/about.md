@@ -6,13 +6,11 @@ subtitle: >
   I am the <strong style="font-size: 1.4em; font-weight: 700;">Hentges Fellow in Finance</strong> and an<br>
   <strong style="font-size: 1.4em; font-weight: 700;">Associate Professor</strong> in the<br>
   <strong style="font-size: 1.4em; font-weight: 700;">Department of Finance</strong> at a<br>
-  <strong style="font-size: 1.4em; font-weight: 700;">Tippie-top College of Business</strong> at a large, public<br>
+  <strong style="font-size: 1.4em; font-weight: 700;">Tippie</strong>-top <strong style="font-size: 1.4em; font-weight: 700;">College of Business</strong> at a large, public<br>
   <strong style="font-size: 1.4em; font-weight: 700;">University</strong> in the state <strong style="font-size: 1.4em; font-weight: 700;">of Iowa</strong>.
 
 profile:
   align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
   more_info: >
     <p>📅 <a href="https://calendly.com/cellis212">Schedule a meeting</a></p>
     <p>✉️ <a href="mailto:Cellis212@gmail.com">Cellis212 [at] gmail [dot] com</a></p>
@@ -26,6 +24,8 @@ announcements:
 latest_posts:
   enabled: false
 ---
+
+<img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Cameron Ellis presenting" style="width:100%; border-radius:12px; margin-bottom:1.5rem;">
 
 I study how people and firms manage risk, and what happens when the institutions meant to help them get the incentives wrong. My research spans insurance economics, household finance, and public policy, usually with a causal-inference bent and a soft spot for administrative data.
 
