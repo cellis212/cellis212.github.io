@@ -10,6 +10,13 @@ nav_order: 1
 <!-- Bibsearch Feature -->
 {% include bib_search.liquid %}
 
+<style>
+  /* Do not underline my own name in author lists */
+  .publications ol.bibliography li .author > em {
+    border-bottom: none;
+  }
+</style>
+
 ## Household Finance and Disaster Risk
 
 <div class="publications">
