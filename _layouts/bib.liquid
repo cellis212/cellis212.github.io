@@ -165,7 +165,8 @@
       {% capture entrymonth %}{{ " " }}{{ entry.month | capitalize }}{% endcapture %}
     {% endif %}
     {% assign entryyear = '' %}
-    {% if entry.year %}
+    {% comment %} Working papers (@unpublished) display no year {% endcomment %}
+    {% if entry.year and entry.type != 'unpublished' %}
       {% capture entryyear %}{{ " " }}{{ entry.year }}{% endcapture %}
     {% endif %}
     {% if entry.location %}
