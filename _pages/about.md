@@ -3,7 +3,8 @@ layout: about
 title: about
 permalink: /
 subtitle: >
-  I am the <strong style="font-size: 1.4em; font-weight: 700;">Hentges Fellow in Finance</strong> and an<br>
+  I am the<br>
+  <strong style="font-size: 1.4em; font-weight: 700;">Hentges Fellow in Finance</strong> and an<br>
   <strong style="font-size: 1.4em; font-weight: 700;">Associate Professor</strong> in the<br>
   <strong style="font-size: 1.4em; font-weight: 700;">Department of Finance</strong> at a<br>
   <strong style="font-size: 1.4em; font-weight: 700;">Tippie</strong>-top <strong style="font-size: 1.4em; font-weight: 700;">College of Business</strong> at a large, public<br>
