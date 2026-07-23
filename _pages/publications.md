@@ -13,31 +13,45 @@ nav_order: 1
     border-bottom: none;
   }
 
+  /* Two-column research layout: papers left, topic cloud right */
+  .research-layout {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .research-main { flex: 999 1 340px; min-width: 0; }
+  .research-cloud {
+    flex: 1 1 230px;
+    max-width: 300px;
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+  }
+
   /* Topic cloud */
   .topic-cloud-label {
-    text-align: center;
     color: var(--global-text-color-light);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.7rem;
   }
   .topic-cloud {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem 0.55rem;
+    gap: 0.35rem 0.4rem;
     align-items: baseline;
-    justify-content: center;
-    margin: 0 auto 2.5rem;
-    max-width: 60rem;
-    line-height: 1.6;
+    justify-content: flex-start;
   }
   .topic-tag {
     border: 1px solid var(--global-divider-color);
     background: transparent;
     color: var(--global-text-color);
     border-radius: 999px;
-    padding: 0.18em 0.7em;
+    padding: 0.16em 0.65em;
     cursor: pointer;
     font-family: inherit;
     transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
@@ -53,37 +67,55 @@ nav_order: 1
   }
   .topic-tag.tag-all { font-weight: 600; }
   .topic-count { opacity: 0.55; font-size: 0.7em; margin-left: 0.2em; }
+
+  /* On narrow screens, drop the cloud below the papers, full width */
+  @media (max-width: 768px) {
+    .research-cloud {
+      position: static;
+      max-width: none;
+      max-height: none;
+      overflow: visible;
+      order: -1;
+      margin-bottom: 1.5rem;
+    }
+  }
 </style>
 
-<div class="topic-cloud-label">Filter by topic</div>
-<div class="topic-cloud" id="topic-cloud"></div>
+<div class="research-layout">
+  <div class="research-main">
+    <div class="topic-section" data-topic="household">
+      <h2>Household Finance and Disaster Risk</h2>
+      <div class="publications">
+      {% bibliography -f papers -q @*[topic=household] -g none %}
+      </div>
+    </div>
 
-<div class="topic-section" data-topic="household">
-  <h2>Household Finance and Disaster Risk</h2>
-  <div class="publications">
-  {% bibliography -f papers -q @*[topic=household] -g none %}
-  </div>
-</div>
+    <div class="topic-section" data-topic="health">
+      <h2>Health Economics and Healthcare Finance</h2>
+      <div class="publications">
+      {% bibliography -f papers -q @*[topic=health] -g none %}
+      </div>
+    </div>
 
-<div class="topic-section" data-topic="health">
-  <h2>Health Economics and Healthcare Finance</h2>
-  <div class="publications">
-  {% bibliography -f papers -q @*[topic=health] -g none %}
-  </div>
-</div>
+    <div class="topic-section" data-topic="life">
+      <h2>Life Insurance and Annuities</h2>
+      <div class="publications">
+      {% bibliography -f papers -q @*[topic=life] -g none %}
+      </div>
+    </div>
 
-<div class="topic-section" data-topic="life">
-  <h2>Life Insurance and Annuities</h2>
-  <div class="publications">
-  {% bibliography -f papers -q @*[topic=life] -g none %}
+    <div class="topic-section" data-topic="misc">
+      <h2>Miscellaneous</h2>
+      <div class="publications">
+      {% bibliography -f papers -q @*[topic=misc] -g none %}
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="topic-section" data-topic="misc">
-  <h2>Miscellaneous</h2>
-  <div class="publications">
-  {% bibliography -f papers -q @*[topic=misc] -g none %}
-  </div>
+  <aside class="research-cloud">
+    <div class="topic-cloud-label">Filter by topic</div>
+    <div class="topic-cloud" id="topic-cloud"></div>
+  </aside>
 </div>
 
 <script>
@@ -138,7 +170,7 @@ nav_order: 1
       b.textContent = label;
       if (count != null) {
         if (max !== min) {
-          b.style.fontSize = (0.8 + (count - min) / (max - min) * 0.9).toFixed(2) + 'rem';
+          b.style.fontSize = (0.75 + (count - min) / (max - min) * 0.55).toFixed(2) + 'rem';
         }
         var span = document.createElement('span');
         span.className = 'topic-count';
