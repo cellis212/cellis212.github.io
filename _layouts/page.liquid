@@ -1,0 +1,42 @@
+---
+layout: default
+---
+{% if page._styles %}
+  <!-- Page/Post style -->
+  <style type="text/css">
+    {{ page._styles }}
+  </style>
+{% endif %}
+
+<div class="post">
+  {% comment %} Site-wide banner across non-home pages (the presentation photo). Per-page override via `banner:`. {% endcomment %}
+  {% assign page_banner = page.banner | default: '/assets/img/prof_pic.jpg' %}
+  {% if page_banner %}
+    <img
+      src="{{ page_banner | relative_url }}"
+      alt="{{ page.banner_alt | default: 'Cameron Ellis presenting' }}"
+      class="img-fluid rounded z-depth-1"
+      style="width: 100%; margin-bottom: 1.5rem;"
+    />
+  {% endif %}
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-description">{{ page.description }}</p>
+  </header>
+
+  <article>
+    {{ content }}
+  </article>
+
+  {% if page.related_publications %}
+    <h2>References</h2>
+    <div class="publications">
+      {% bibliography --cited_in_order %}
+    </div>
+  {% endif %}
+
+  {% if site.plugins contains 'al_comments' %}
+    {% include plugins/al_comments.liquid %}
+  {% endif %}
+</div>
