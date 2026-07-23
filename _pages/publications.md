@@ -2,7 +2,7 @@
 layout: page
 permalink: /research/
 title: research
-description: Peer-reviewed publications and working papers, grouped by topic.
+description: Peer-reviewed publications and working papers. Click a topic to filter.
 nav: true
 nav_order: 1
 ---
@@ -13,23 +13,32 @@ nav_order: 1
     border-bottom: none;
   }
 
-  /* Clickable topic cloud */
+  /* Topic cloud */
+  .topic-cloud-label {
+    text-align: center;
+    color: var(--global-text-color-light);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
   .topic-cloud {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 0.75rem;
+    gap: 0.4rem 0.55rem;
     align-items: baseline;
     justify-content: center;
-    margin: 0.5rem 0 2.5rem;
+    margin: 0 auto 2.5rem;
+    max-width: 60rem;
+    line-height: 1.6;
   }
   .topic-tag {
     border: 1px solid var(--global-divider-color);
     background: transparent;
     color: var(--global-text-color);
     border-radius: 999px;
-    padding: 0.28em 0.9em;
+    padding: 0.18em 0.7em;
     cursor: pointer;
-    line-height: 1.25;
     font-family: inherit;
     transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
   }
@@ -42,16 +51,12 @@ nav_order: 1
     border-color: var(--global-theme-color);
     color: #fff;
   }
-  .topic-count { opacity: 0.6; font-size: 0.72em; margin-left: 0.25em; }
+  .topic-tag.tag-all { font-weight: 600; }
+  .topic-count { opacity: 0.55; font-size: 0.7em; margin-left: 0.2em; }
 </style>
 
-<div class="topic-cloud" id="topic-cloud">
-  <button type="button" class="topic-tag active" data-filter="all">All</button>
-  <button type="button" class="topic-tag" data-filter="household">Household Finance &amp; Disaster Risk</button>
-  <button type="button" class="topic-tag" data-filter="health">Health Economics &amp; Healthcare Finance</button>
-  <button type="button" class="topic-tag" data-filter="life">Life Insurance &amp; Annuities</button>
-  <button type="button" class="topic-tag" data-filter="misc">Miscellaneous</button>
-</div>
+<div class="topic-cloud-label">Filter by topic</div>
+<div class="topic-cloud" id="topic-cloud"></div>
 
 <div class="topic-section" data-topic="household">
   <h2>Household Finance and Disaster Risk</h2>
@@ -85,43 +90,71 @@ nav_order: 1
   document.addEventListener('DOMContentLoaded', function () {
     var cloud = document.getElementById('topic-cloud');
     if (!cloud) return;
-    var tags = Array.prototype.slice.call(cloud.querySelectorAll('.topic-tag'));
     var sections = Array.prototype.slice.call(document.querySelectorAll('.topic-section'));
 
-    // Count papers per topic (self-updating as papers are added).
+    // Build [ {li, tags[]} ] from each paper's data-tags, and a tag -> count map.
+    var papers = [];
     var counts = {};
-    sections.forEach(function (s) {
-      counts[s.getAttribute('data-topic')] = s.querySelectorAll('.bibliography > li').length;
+    document.querySelectorAll('.topic-section [data-tags]').forEach(function (row) {
+      var li = row.closest('li');
+      if (!li) return;
+      var tags = (row.getAttribute('data-tags') || '')
+        .split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+      papers.push({ li: li, tags: tags });
+      tags.forEach(function (t) { counts[t] = (counts[t] || 0) + 1; });
     });
-    var vals = Object.keys(counts).map(function (k) { return counts[k]; });
+
+    var unique = Object.keys(counts).sort(function (a, b) {
+      return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
+    var vals = unique.map(function (t) { return counts[t]; });
     var min = Math.min.apply(null, vals);
     var max = Math.max.apply(null, vals);
 
-    // Scale each topic tag's size by its paper count and append the count.
-    tags.forEach(function (tag) {
-      var f = tag.getAttribute('data-filter');
-      if (f === 'all') return;
-      var c = counts[f] || 0;
-      var scale = (max === min) ? 1 : (c - min) / (max - min);
-      tag.style.fontSize = (0.9 + scale * 0.9).toFixed(2) + 'rem';
-      var span = document.createElement('span');
-      span.className = 'topic-count';
-      span.textContent = '(' + c + ')';
-      tag.appendChild(document.createTextNode(' '));
-      tag.appendChild(span);
-    });
+    var active = null; // null = show all
 
-    function apply(filter) {
-      tags.forEach(function (t) {
-        t.classList.toggle('active', t.getAttribute('data-filter') === filter);
-      });
+    function render() {
       sections.forEach(function (s) {
-        s.style.display = (filter === 'all' || s.getAttribute('data-topic') === filter) ? '' : 'none';
+        var visible = 0;
+        papers.forEach(function (p) {
+          if (p.li.closest('.topic-section') !== s) return;
+          var show = (active === null) || p.tags.indexOf(active) !== -1;
+          p.li.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        s.style.display = visible === 0 ? 'none' : '';
+      });
+      cloud.querySelectorAll('.topic-tag').forEach(function (t) {
+        var f = t.getAttribute('data-filter');
+        t.classList.toggle('active', (f === '__all__' && active === null) || f === active);
       });
     }
 
-    tags.forEach(function (tag) {
-      tag.addEventListener('click', function () { apply(tag.getAttribute('data-filter')); });
-    });
+    function makeTag(label, filter, count) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'topic-tag' + (filter === '__all__' ? ' tag-all' : '');
+      b.setAttribute('data-filter', filter);
+      b.textContent = label;
+      if (count != null) {
+        if (max !== min) {
+          b.style.fontSize = (0.8 + (count - min) / (max - min) * 0.9).toFixed(2) + 'rem';
+        }
+        var span = document.createElement('span');
+        span.className = 'topic-count';
+        span.textContent = count;
+        b.appendChild(document.createTextNode(' '));
+        b.appendChild(span);
+      }
+      b.addEventListener('click', function () {
+        active = (filter === '__all__' || filter === active) ? null : filter;
+        render();
+      });
+      return b;
+    }
+
+    cloud.appendChild(makeTag('All', '__all__', null));
+    unique.forEach(function (t) { cloud.appendChild(makeTag(t, t, counts[t])); });
+    render();
   });
 </script>
