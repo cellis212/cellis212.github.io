@@ -2,8 +2,8 @@
 layout: about
 title: about
 permalink: /
-banner: /assets/img/headshot.jpg
-banner_alt: Cameron Ellis
+headshot: /assets/img/headshot.jpg
+headshot_alt: Cameron Ellis
 subtitle: >
   I am the<br>
   <strong style="font-size: 1.4em; font-weight: 700;">Hentges Fellow in Finance</strong> and an<br>

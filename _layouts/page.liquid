@@ -15,8 +15,7 @@ layout: default
     <img
       src="{{ page_banner | relative_url }}"
       alt="{{ page.banner_alt | default: 'Cameron Ellis presenting' }}"
-      class="img-fluid rounded z-depth-1"
-      style="width: 100%; margin-bottom: 1.5rem;"
+      style="display: block; width: 100vw; margin-left: calc(50% - 50vw); height: 200px; object-fit: cover; object-position: center 35%; margin-bottom: 1.5rem;"
     />
   {% endif %}
 

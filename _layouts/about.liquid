@@ -2,26 +2,27 @@
 layout: default
 ---
 <div class="post">
-  {% if page.banner %}
-    <img
-      src="{{ page.banner | relative_url }}"
-      alt="{{ page.banner_alt | default: site.first_name }}"
-      class="img-fluid rounded z-depth-1"
-      style="display: block; width: 100%; max-width: 300px; margin: 0 auto 1.5rem;"
-    />
-  {% endif %}
-
-  <header class="post-header">
-    <h1 class="post-title">
-      {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
-        {{ site.last_name }}
-      {% else %}
-        {{ site.title }}
-      {% endif %}
-    </h1>
-    <p class="desc">{{ page.subtitle }}</p>
-  </header>
+  <div class="about-hero" style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
+    <header class="post-header" style="flex: 1 1 320px; margin-bottom: 0;">
+      <h1 class="post-title">
+        {% if site.title == 'blank' %}
+          <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
+          {{ site.last_name }}
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+      </h1>
+      <p class="desc">{{ page.subtitle }}</p>
+    </header>
+    {% if page.headshot %}
+      <img
+        src="{{ page.headshot | relative_url }}"
+        alt="{{ page.headshot_alt | default: site.first_name }}"
+        class="img-fluid rounded z-depth-1"
+        style="flex: 0 0 auto; width: 240px; max-width: 100%; height: auto; align-self: center;"
+      />
+    {% endif %}
+  </div>
 
   <article>
     {% if page.profile %}
