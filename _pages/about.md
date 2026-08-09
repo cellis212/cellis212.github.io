@@ -37,4 +37,4 @@ I study how people and firms manage risk, and what happens when the institutions
 
 Recent projects look at disaster-recovery lending, the moral-hazard consequences of health-insurance subsidies, annuities in retirement plans, and what medical-cannabis laws do to the roads. You can find the published papers and current drafts on the [research](/research/) page.
 
-A few of the tools I have built are free for anyone to use, over on the [public goods](/public-goods/) page. The fastest way to reach me is [email](mailto:Cellis212@gmail.com), and my calendar is open on [Calendly](https://calendly.com/cellis212).
+A few of the tools I have built are free for anyone to use, over on the [public goods](/public-goods/) page. The fastest way to reach me is [email](mailto:Cellis212@gmail.com), and my calendar is open on [Calendly](https://calendly.com/cellis212). I also have an official work email but, due to insane ADA restrictions, I am not allowed to list it or even *directly* reference my employer even though this is a personal website.
