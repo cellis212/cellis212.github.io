@@ -104,10 +104,17 @@ nav_order: 1
       </div>
     </div>
 
-    <div class="topic-section" data-topic="misc">
-      <h2>Miscellaneous</h2>
+    <div class="topic-section" data-topic="misc_insurance">
+      <h2>Miscellaneous: Insurance</h2>
       <div class="publications">
-      {% bibliography -f papers -q @*[topic=misc] -g none %}
+      {% bibliography -f papers -q @*[topic=misc_insurance] -g none %}
+      </div>
+    </div>
+
+    <div class="topic-section" data-topic="misc_not_insurance">
+      <h2>Miscellaneous: Not Insurance</h2>
+      <div class="publications">
+      {% bibliography -f papers -q @*[topic=misc_not_insurance] -g none %}
       </div>
     </div>
   </div>
