@@ -75,7 +75,7 @@ nav_order: 1
       max-width: none;
       max-height: none;
       overflow: visible;
-      order: -1;
+      flex-basis: 100%;
       margin-bottom: 1.5rem;
     }
   }
